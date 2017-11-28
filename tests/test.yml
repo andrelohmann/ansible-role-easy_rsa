@@ -13,7 +13,7 @@
     easyrsa_key_cn: "your.domain"
     easyrsa_key_name: "SomeKeyName"
     easyrsa_key_ou: "SomeOperationalUnit"
-    easyrsa_key_size: 4096
+    easyrsa_key_size: 1024
     easyrsa_key_expire: 3650
     easyrsa_ca_expire: 3650
     easyrsa_clients:
