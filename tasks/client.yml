@@ -1,0 +1,38 @@
+---
+
+# Block start add client
+- block:
+
+  - name: add client
+    shell: |
+      source ./vars
+      export EASY_RSA="${EASY_RSA:-.}"
+      "$EASY_RSA/pkitool" {{ client.name }}
+    args:
+      chdir: "{{ easyrsa_dir }}/easy-rsa/"
+      executable: /bin/bash
+
+
+  # Block condition add client
+  when: ((client.state is defined and client.state == 'present') or client.state is not defined)
+# Block end add client
+
+# Block start remove client
+- block:
+
+  - name: remove client
+    shell: |
+      source ./vars
+      export EASY_RSA="${EASY_RSA:-.}"
+      "$EASY_RSA/revoke-full" {{ client.name }}
+      export CLIENT={{ client.name }}
+      rm -rf $KEY_DIR/$CLIENT*
+    args:
+      chdir: "{{ easyrsa_dir }}/easy-rsa/"
+      executable: /bin/bash
+
+  # Block condition remove client
+  when: (client.state is defined and client.state == 'absent')
+# Block end remove client
+
+...

@@ -15,18 +15,25 @@ Role Variables
 
 The following mandatory variables need to be set in group_vars/host_vars
 
-    openvpn_use_tls_auth: True/False
-    openvpn_key_country: "__TWO_LETTER_COUNTRY_CODE__"
-    openvpn_key_province: "__PROVINCE__"
-    openvpn_key_city: "__CITY__"
-    openvpn_key_org: "__ORGANISATION__"
-    openvpn_key_email: "__EMAIL__"
-    openvpn_key_cn: "__UNIQUE_COMMON_NAME__"
-    openvpn_key_name: "__KEY_NAME__"
-    openvpn_key_ou: "__OPERATIONAL_UNIT__"
-    openvpn_key_size: 4096 # key size
-    openvpn_key_expire: 3650 #days
-    openvpn_ca_expire: 3650 # days
+    easyrsa_user: root
+    easyrsa_dir: "/root" # where will your easy-rsa folder be stored
+    easyrsa_use_tls_auth: True/False
+    easyrsa_key_country: "__TWO_LETTER_COUNTRY_CODE__"
+    easyrsa_key_province: "__PROVINCE__"
+    easyrsa_key_city: "__CITY__"
+    easyrsa_key_org: "__ORGANISATION__"
+    easyrsa_key_email: "__EMAIL__"
+    easyrsa_key_cn: "__UNIQUE_COMMON_NAME__" # e.g. your.domain
+    easyrsa_key_name: "__KEY_NAME__"
+    easyrsa_key_ou: "__OPERATIONAL_UNIT__"
+    easyrsa_key_size: 4096 # key size
+    easyrsa_key_expire: 3650 # days
+    easyrsa_ca_expire: 3650 # days
+    easyrsa_clients:
+    - name: __CLIENT_ONE__
+      state: present/absent # absent clients will be
+    - name: __CLIENT_TWO__
+      state: present/absent
 
 Example Playbook
 ----------------
