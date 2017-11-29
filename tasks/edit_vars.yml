@@ -4,7 +4,7 @@
   lineinfile:
     path: "{{ easyrsa_dir }}/easy-rsa/vars"
     regexp: "^export EASY_RSA="
-    line: 'export EASY_RSA="/home/ubuntu/ca/easy-rsa"'
+    line: "export EASY_RSA=\"{{ easyrsa_dir }}/easy-rsa\""
     state: present
 
 - name: update KEY_SIZE
