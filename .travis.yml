@@ -27,9 +27,9 @@ script:
   # Run the role/playbook with ansible-playbook.
   - ansible-playbook -i tests/inventory tests/test.yml --connection=local --sudo
   # cat client certificates
-  - cat /root/easy-rsa/keys/clientOne.csr
-  - cat /root/easy-rsa/keys/clientTwo.csr
-  - cat /root/easy-rsa/keys/clientThree.csr
+  - sudo cat /root/easy-rsa/keys/clientOne.csr
+  - sudo cat /root/easy-rsa/keys/clientTwo.csr
+  - sudo cat /root/easy-rsa/keys/clientThree.csr
 
 notifications:
   webhooks: https://galaxy.ansible.com/api/v1/notifications/
