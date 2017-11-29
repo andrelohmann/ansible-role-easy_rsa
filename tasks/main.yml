@@ -38,7 +38,7 @@
       dest: "{{ easyrsa_dir }}"
       owner: "{{ easyrsa_user }}"
       group: "{{ easyrsa_user }}"
-      mode: 0644
+      mode: 0700
 
   - name: manipulate easy-rsa vars
     include: edit_vars.yml
