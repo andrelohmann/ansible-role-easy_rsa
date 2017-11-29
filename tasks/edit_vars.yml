@@ -2,77 +2,77 @@
 
 - name: update EASY_RSA director
   lineinfile:
-    dest: "{{ easyrsa_dir }}/easy-rsa/vars"
+    path: "{{ easyrsa_dir }}/easy-rsa/vars"
     regexp: "^export EASY_RSA="
     line: 'export EASY_RSA="/home/ubuntu/ca/easy-rsa"'
     state: present
 
 - name: update KEY_SIZE
   lineinfile:
-    dest: "{{ easyrsa_dir }}/easy-rsa/vars"
+    path: "{{ easyrsa_dir }}/easy-rsa/vars"
     regexp: "^export KEY_SIZE="
     line: "export KEY_SIZE=\"{{ easyrsa_key_size }}\""
     state: present
 
 - name: update KEY_EXPIRE
   lineinfile:
-    dest: "{{ easyrsa_dir }}/easy-rsa/vars"
+    path: "{{ easyrsa_dir }}/easy-rsa/vars"
     regexp: "^export KEY_EXPIRE="
     line: "export KEY_EXPIRE=\"{{ easyrsa_key_expire }}\""
     state: present
 
 - name: update CA_EXPIRE
   lineinfile:
-    dest: "{{ easyrsa_dir }}/easy-rsa/vars"
+    path: "{{ easyrsa_dir }}/easy-rsa/vars"
     regexp: "^export CA_EXPIRE="
     line: "export CA_EXPIRE=\"{{ easyrsa_ca_expire }}\""
     state: present
 
 - name: update KEY_COUNTRY
   lineinfile:
-    dest: "{{ easyrsa_dir }}/easy-rsa/vars"
+    path: "{{ easyrsa_dir }}/easy-rsa/vars"
     regexp: "^export KEY_COUNTRY="
     line: "export KEY_COUNTRY=\"{{ easyrsa_key_country }}\""
     state: present
 
 - name: update KEY_PROVINCE
   lineinfile:
-    dest: "{{ easyrsa_dir }}/easy-rsa/vars"
+    path: "{{ easyrsa_dir }}/easy-rsa/vars"
     regexp: "^export KEY_PROVINCE="
     line: "export KEY_PROVINCE=\"{{ easyrsa_key_province }}\""
     state: present
 
 - name: update KEY_CITY
   lineinfile:
-    dest: "{{ easyrsa_dir }}/easy-rsa/vars"
+    path: "{{ easyrsa_dir }}/easy-rsa/vars"
     regexp: "^export KEY_CITY="
     line: "export KEY_CITY=\"{{ easyrsa_key_city }}\""
     state: present
 
 - name: update KEY_ORG
   lineinfile:
-    dest: "{{ easyrsa_dir }}/easy-rsa/vars"
+    path: "{{ easyrsa_dir }}/easy-rsa/vars"
     regexp: "^export KEY_ORG="
     line: "export KEY_ORG=\"{{ easyrsa_key_org }}\""
     state: present
 
 - name: update KEY_EMAIL
   lineinfile:
-    dest: "{{ easyrsa_dir }}/easy-rsa/vars"
+    path: "{{ easyrsa_dir }}/easy-rsa/vars"
     regexp: "^export KEY_EMAIL="
     line: "export KEY_EMAIL=\"{{ easyrsa_key_email }}\""
     state: present
 
 - name: update KEY_OU
   lineinfile:
-    dest: "{{ easyrsa_dir }}/easy-rsa/vars"
+    path: "{{ easyrsa_dir }}/easy-rsa/vars"
     regexp: "^export KEY_OU="
     line: "export KEY_OU=\"{{ easyrsa_key_ou }}\""
     state: present
 
 - name: update KEY_NAME
   lineinfile:
-    dest: "{{ easyrsa_dir }}/easy-rsa/vars"
+    path: "{{ easyrsa_dir }}/easy-rsa/vars"
     regexp: "^export KEY_NAME="
     line: "export KEY_NAME=\"{{ easyrsa_key_name }}\""
     state: present

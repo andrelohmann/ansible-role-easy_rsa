@@ -1,13 +1,5 @@
 ---
 
-- name: update the machine
-  apt:
-    update_cache: yes
-
-- name: upgrade the machine
-  apt:
-    upgrade: full
-
 - name: add openvpn key
   apt_key:
     url: https://swupdate.openvpn.net/repos/repo-public.gpg
@@ -22,9 +14,12 @@
 - name: install packages
   apt:
     name: "{{item}}"
-    state: installed
+    state: latest
     dpkg_options: 'force-confnew,force-confdef'
+    autoclean: yes
     autoremove: yes
+    update_cache: yes
+    cache_valid_time: 3600
   with_items:
   - openvpn
   - openssl
@@ -51,7 +46,7 @@
   - name: link openssl.cnf
     file:
       src: "{{ easyrsa_dir }}/easy-rsa/openssl-1.0.0.cnf"
-      dest: "{{ easyrsa_dir }}/easy-rsa/openssl.cnf"
+      path: "{{ easyrsa_dir }}/easy-rsa/openssl.cnf"
       owner: "{{ easyrsa_user }}"
       group: "{{ easyrsa_user }}"
       state: link
