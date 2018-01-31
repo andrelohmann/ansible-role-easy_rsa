@@ -28,9 +28,9 @@ script:
   - ansible-playbook -i tests/inventory tests/test.yml --connection=local --sudo
   - ansible-playbook -i tests/inventory tests/test.yml --connection=local --sudo
   # cat client certificates
-  - sudo /bin/sh -c 'if [ -s /root/easy-rsa/keys/clientOne.crt ]; then echo 0; else echo 1; fi'
-  - sudo /bin/sh -c 'if [ -s /root/easy-rsa/keys/clientTwo.crt ]; then echo 0; else echo 1; fi'
-  - sudo /bin/sh -c 'if [ -s /root/easy-rsa/keys/clientThree.crt ]; then echo 0; else echo 1; fi'
+  - sudo /bin/sh -c 'if [ -s /root/easy-rsa/keys/clientOne.crt ]; then exit 0; else exit 1; fi'
+  - sudo /bin/sh -c 'if [ -s /root/easy-rsa/keys/clientTwo.crt ]; then exit 0; else exit 1; fi'
+  - sudo /bin/sh -c 'if [ -s /root/easy-rsa/keys/clientThree.crt ]; then exit 0; else exit 1; fi'
   - sudo cat /root/easy-rsa/keys/clientOne.crt
   - sudo cat /root/easy-rsa/keys/clientTwo.crt
   - sudo cat /root/easy-rsa/keys/clientThree.crt
