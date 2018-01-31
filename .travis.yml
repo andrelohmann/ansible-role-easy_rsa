@@ -26,10 +26,12 @@ script:
   - ansible-playbook tests/test.yml -i tests/inventory --syntax-check
   # Run the role/playbook with ansible-playbook.
   - ansible-playbook -i tests/inventory tests/test.yml --connection=local --sudo
+  - ansible-playbook -i tests/inventory tests/test.yml --connection=local --sudo
   # cat client certificates
-  - sudo cat /root/easy-rsa/keys/clientOne.csr
-  - sudo cat /root/easy-rsa/keys/clientTwo.csr
-  - sudo cat /root/easy-rsa/keys/clientThree.csr
+  - sudo if [ -s /root/easy-rsa/keys/clientOne.crt ]; then exit 0; else exit 1; fi
+  - sudo if [ -s /root/easy-rsa/keys/clientOne.crt ]; then exit 0; else exit 1; fi
+  - sudo if [ -s /root/easy-rsa/keys/clientOne.crt ]; then exit 1; else exit 0; fi
+  - sudo cat /root/easy-rsa/keys/clientThree.crt
 
 notifications:
   webhooks: https://galaxy.ansible.com/api/v1/notifications/

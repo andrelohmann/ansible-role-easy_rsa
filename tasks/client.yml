@@ -3,6 +3,11 @@
 # Block start add client
 - block:
 
+  - name: check for existing client certificate
+    stat:
+      path: "{{ easyrsa_dir }}/easy-rsa/keys/{{ client.name }}.crt"
+    register: _client_crt
+
   - name: add client
     shell: |
       source ./vars
@@ -11,6 +16,7 @@
     args:
       chdir: "{{ easyrsa_dir }}/easy-rsa/"
       executable: /bin/bash
+    when: not _client_crt.stat.exists
 
 
   # Block condition add client
