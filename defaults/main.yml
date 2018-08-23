@@ -2,6 +2,7 @@
 easyrsa_user: root
 easyrsa_dir: "/root"
 easyrsa_use_tls_auth: True
+easyrsa_use_dist_packages: False
 easyrsa_key_country: "DE"
 easyrsa_key_province: "SomeProvince"
 easyrsa_key_city: "SomeCity"
