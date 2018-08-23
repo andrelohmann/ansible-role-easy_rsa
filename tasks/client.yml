@@ -17,7 +17,8 @@
       chdir: "{{ easyrsa_dir }}/easy-rsa/"
       executable: /bin/bash
     when: not _client_crt.stat.exists
-
+    become: yes
+    become_user: "{{ easyrsa_user }}"
 
   # Block condition add client
   when: ((client.state is defined and client.state == 'present') or client.state is not defined)
@@ -36,6 +37,8 @@
     args:
       chdir: "{{ easyrsa_dir }}/easy-rsa/"
       executable: /bin/bash
+    become: yes
+    become_user: "{{ easyrsa_user }}"
 
   # Block condition remove client
   when: (client.state is defined and client.state == 'absent')

@@ -1,15 +1,18 @@
 ---
 
-- name: add openvpn key
-  apt_key:
-    url: https://swupdate.openvpn.net/repos/repo-public.gpg
+- block:
+  - name: add openvpn key
+    apt_key:
+      url: https://swupdate.openvpn.net/repos/repo-public.gpg
+      state: present
+
+  - name: add openvpn repo
+    apt_repository:
+      repo: "deb http://build.openvpn.net/debian/openvpn/stable {{ ansible_distribution_release }} main"
+      filename: "openvpn"
     state: present
 
-- name: add openvpn repo
-  apt_repository:
-    repo: "deb http://build.openvpn.net/debian/openvpn/stable {{ ansible_distribution_release }} main"
-    filename: "openvpn"
-    state: present
+  when: not easyrsa_use_dist_packages
 
 - name: install packages
   apt:
@@ -21,7 +24,6 @@
     update_cache: yes
     cache_valid_time: 3600
   with_items:
-  - openvpn
   - openssl
   - easy-rsa
 
@@ -66,6 +68,8 @@
     args:
       chdir: "{{ easyrsa_dir }}/easy-rsa/"
       executable: /bin/bash
+    become: yes
+    become_user: "{{ easyrsa_user }}"
 
   - name: build-ca
     shell: |
@@ -75,6 +79,8 @@
     args:
       chdir: "{{ easyrsa_dir }}/easy-rsa/"
       executable: /bin/bash
+    become: yes
+    become_user: "{{ easyrsa_user }}"
 
   - name: build-key-server
     shell: |
@@ -84,6 +90,8 @@
     args:
       chdir: "{{ easyrsa_dir }}/easy-rsa/"
       executable: /bin/bash
+    become: yes
+    become_user: "{{ easyrsa_user }}"
 
   - name: build-dh
     shell: |
@@ -92,12 +100,31 @@
     args:
       chdir: "{{ easyrsa_dir }}/easy-rsa/"
       executable: /bin/bash
+    become: yes
+    become_user: "{{ easyrsa_user }}"
 
-  - name: build tls-auth key
-    shell: openvpn --genkey --secret keys/ta.key
-    args:
-      chdir: "{{ easyrsa_dir }}/easy-rsa/"
-      executable: /bin/bash
+  - block:
+
+    - name: install openvpn
+      apt:
+        name: "{{item}}"
+        state: latest
+        dpkg_options: 'force-confnew,force-confdef'
+        autoclean: yes
+        autoremove: yes
+        update_cache: yes
+        cache_valid_time: 3600
+      with_items:
+      - openvpn
+
+    - name: build tls-auth key
+      shell: openvpn --genkey --secret keys/ta.key
+      args:
+        chdir: "{{ easyrsa_dir }}/easy-rsa/"
+        executable: /bin/bash
+      become: yes
+      become_user: "{{ easyrsa_user }}"
+
     when: easyrsa_use_tls_auth
 
   # Block condition initialize easy-rsa

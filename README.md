@@ -18,6 +18,7 @@ The following mandatory variables need to be set in group_vars/host_vars
     easyrsa_user: root
     easyrsa_dir: "/root" # where will your easy-rsa folder be stored
     easyrsa_use_tls_auth: True/False
+    easyrsa_use_dist_packages: True/False # wether to use the distros repository or the openvpn repository
     easyrsa_key_country: "__TWO_LETTER_COUNTRY_CODE__"
     easyrsa_key_province: "__PROVINCE__"
     easyrsa_key_city: "__CITY__"
