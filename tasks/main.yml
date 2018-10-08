@@ -16,16 +16,17 @@
 
 - name: install packages
   apt:
-    name: "{{item}}"
+    name: "{{ packages }}"
     state: latest
     dpkg_options: 'force-confnew,force-confdef'
     autoclean: yes
     autoremove: yes
     update_cache: yes
     cache_valid_time: 3600
-  with_items:
-  - openssl
-  - easy-rsa
+  vars:
+    packages:
+    - openssl
+    - easy-rsa
 
 - name: check for easy_rsa existence
   stat:
@@ -107,15 +108,13 @@
 
     - name: install openvpn
       apt:
-        name: "{{item}}"
+        name: openvpn
         state: latest
         dpkg_options: 'force-confnew,force-confdef'
         autoclean: yes
         autoremove: yes
         update_cache: yes
         cache_valid_time: 3600
-      with_items:
-      - openvpn
 
     - name: build tls-auth key
       shell: openvpn --genkey --secret keys/ta.key
