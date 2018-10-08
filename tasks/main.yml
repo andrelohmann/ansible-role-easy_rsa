@@ -10,7 +10,7 @@
     apt_repository:
       repo: "deb http://build.openvpn.net/debian/openvpn/stable {{ ansible_distribution_release }} main"
       filename: "openvpn"
-    state: present
+      state: present
 
   when: not easyrsa_use_dist_packages
 
