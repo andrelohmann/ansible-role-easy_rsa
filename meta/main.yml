@@ -1,5 +1,6 @@
 ---
 galaxy_info:
+  role_name: easy_rsa
   author: andrelohmann
   description: ansible galaxy role to deploy easy-rsa
   company: smartformer UG
@@ -12,9 +13,7 @@ galaxy_info:
     - name: Ubuntu
       versions:
       - xenial
-    - name: Debian
-      versions:
-      - stretch
+      - bionic
 
   galaxy_tags:
   - easy-rsa
